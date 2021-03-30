@@ -77,6 +77,7 @@ def generic_bfs_edges(G, source, neighbors=None, depth_limit=None, sort_neighbor
         parent, depth_now, children = queue[0]
         try:
             child = next(children)
+            print(f"Prendendo in esame il nodo: {child}")
             if child not in visited:
                 yield parent, child
                 visited.add(child)
