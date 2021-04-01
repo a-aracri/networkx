@@ -13,10 +13,13 @@ def greedy_path(G, source, target, heuristic=None, weight="weight"):
     push = heappush
     pop = heappop
 
+    # Queue stores: priority (heuristic's value), counter, node, cost to reach 
+    # and parent.
     c = count()
     queue = [(0, next(c), source, 0, None)]
-    
+    # Saving in enqueued cost to reach a node and the heuistic's value
     enqueued = {}
+    # Savin visited nodes with parents
     explored = {}
 
     # Using weight if heuristic is None
@@ -41,7 +44,7 @@ def greedy_path(G, source, target, heuristic=None, weight="weight"):
         if curnode in explored:
             if explored[curnode] is None:
                 continue
-
+            # Skipping worst paths
             qcost, h = enqueued[curnode]
             if qcost < dist:
                 continue
@@ -56,7 +59,7 @@ def greedy_path(G, source, target, heuristic=None, weight="weight"):
                 if qcost <= ncost:
                     continue
             else:
-                # setting costs in case heuristic is None
+                # Setting costs in case heuristic is None
                 enqueued[neighbor] = ncost, ncost
                 h = heuristic(neighbor, target)
             enqueued[neighbor] = ncost, h
